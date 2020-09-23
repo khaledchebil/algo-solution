@@ -1,0 +1,84 @@
+ALGORITHM checkNumb
+VAR
+  set1 : ARRAY_OF INTEGER[50];
+  set2 : ARRAY_OF INTEGER[50];
+  tabCom : ARRAY_OF INTEGER[100];
+  tabdiff : ARRAY_OF INTEGER[100];
+  n,m,s: INTEGER :=0;
+BEGIN
+ //set 1
+  REPEAT
+    write("enter the array size for set1: ");
+    read(n);
+  UNTIL (n>0 AND n<=50);
+
+
+//set2
+  REPEAT
+    write("enter the array size for set2: ");
+    read(m);
+  UNTIL (m>0 AND m<=50);
+
+
+
+//fill the 1st array
+FOR i FROM 0 TO n-1 DO
+  read(set1[i]);
+END_FOR
+
+//fill the 2nd array
+FOR i FROM 0 TO m-1   DO
+  read(set2[i]);
+END_FOR
+
+//tabCum fih the same num in array
+FOR i FROM 0 TO n-1   DO
+  FOR j FROM 0 TO m-1   DO
+    IF (set1[i] = set2[j]) THEN
+      tabCom[s] = set1[i];
+      s := s+1;
+      break;
+    END_IF
+  END_FOR
+END_FOR
+
+//tabDiff different
+//3ana les numbre commun, donc on prand les rest de set1  diff de tabCum
+
+//set1
+s:= 0;
+FOR i FROM 0 TO n-1   DO
+  FOR j FROM tabCom TO tabCom.length-1   DO
+    IF (tabCom[j] = set1[i]) THEN
+      break;
+    END_IF
+    IF (tabCom[j] <> set1[i] AND j=tabCom.length-1) THEN
+      tabDiff[s] = set1[i];
+      
+    END_IF
+  END_FOR
+END_FOR
+
+//set2 diff
+s:= 0;
+FOR i FROM 0 TO m-1   DO
+  FOR j FROM tabCom TO tabCom.length-1   DO
+    IF (tabCom[j] = set2[i]) THEN
+      break;
+    END_IF
+    IF (tabCom[j] <> set2[i] AND j=tabCom.length-1) THEN
+      tabDiff[s] = set2[i];
+      s:=s+1;
+    END_IF
+  END_FOR
+END_FOR
+
+s:= 0;
+FOR i FROM 0 TO tabDiff.length-1 DO
+  s:=s+tabDiff[i];
+END_FOR
+write(s);
+END
+
+
+

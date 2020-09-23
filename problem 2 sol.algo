@@ -1,0 +1,40 @@
+ALGORITHM solution1
+VAR
+     set1 : ARRAY_OF INTEGER[50];
+ set2 : ARRAY_OF INTEGER[50];
+ tab : ARRAY_OF INTEGER[100];
+ n: INTEGER :=0;
+ m: INTEGER :=0;
+ s: INTEGER :=0;
+BEGIN
+   REPEAT
+    Write("give array size you want to use for set1");
+    Read(n);
+UNTIL (n>0 AND n<=50)
+REPEAT
+    Write("give array size you want to use for set2");
+    Read(m);
+UNTIL (m>0 AND m<=50)
+
+ FOR i FROM 0 TO n-1 DO
+       Read(set1[i]);
+   END_FOR
+ FOR i FROM 0 TO m-1 DO
+       Read(set2[i]);
+   END_FOR
+
+
+s:=0;
+   FOR i FROM 0 TO n-1 DO
+       FOR j FROM 0 TO m-1 DO
+       IF (set1[i]=set2[j]) THEN
+           tab[s]:=set1[i];
+           s:=s+1;
+           break;
+       END_IF
+   END_FOR
+   END_FOR
+
+   Write(s);
+   
+END

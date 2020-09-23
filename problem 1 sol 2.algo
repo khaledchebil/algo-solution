@@ -1,0 +1,79 @@
+ALGORITHM solution2
+VAR
+ htab : HASH_TABLE<INTEGER,INTEGER>;
+ set1 : ARRAY_OF INTEGER[50];
+ set2 : ARRAY_OF INTEGER[50];
+ tab : ARRAY_OF INTEGER[100]; 
+ t : ARRAY_OF INTEGER[100];
+ n,m,s,i,j :INTEGER :=0
+BEGIN
+
+ REPEAT
+    Write("give array size for set1");
+    Read(n);
+UNTIL (n>0 AND n<=50) 
+
+
+REPEAT
+    Write("give array size for set2");
+    Read(m);
+UNTIL (m>0 AND m<=50)
+END
+
+ FOR i FROM 0 TO n-1 DO
+       Read(set1[i]);
+   END_FOR
+ FOR i FROM 0 TO m-1 DO
+       Read(set2[i]);
+   END_FOR
+
+   s:=0;
+   FOR i FROM 0 TO n-1 DO
+       FOR j FROM 0 TO m-1 DO
+       IF (set1[i]=set2[j]) THEN
+           tab[s]:=set1[i];
+           s:=s+1;
+           break;
+       END_IF
+   END_FOR
+   END_FOR
+
+   s:=0;
+   FOR i FROM 0 TO n-1 DO
+       FOR j FROM 0 TO tab.length-1 DO
+       IF (tab[j]=set1[i]) THEN
+           break;
+       END_IF
+       IF (set1[i]<>tab[j] AND j=tab.length-1) THEN
+           t[s]:=set1[i];
+           s:=s+1;
+       END_IF
+   END_FOR
+   END_FOR
+
+     FOR i FROM 0 TO m-1 DO
+       FOR j FROM 0 TO tab.length-1 DO
+       IF (tab[j]=set2[i]) THEN
+           break;
+       END_IF
+       IF (set1[i]<>tab[j] AND j=tab.length-1) THEN
+           t[s]:=set2[i];
+           s:=s+1;
+       END_IF
+   END_FOR
+   END_FOR
+
+   FOR i FROM 0 TO t.length-1 DO
+    htab.insert(t[i],0);
+END_FOR
+FOR i FROM 0 TO tab.length-1 DO
+    htab.insert(tab[i],1);
+END_FOR
+
+i:=0;
+WHILE (i<t.length) DO
+    s:=s+htab[t[i]];
+    i:=i+1;
+END_WHILE
+Write(s);
+END
